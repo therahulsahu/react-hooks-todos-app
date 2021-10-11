@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
-import { Typography, Paper, AppBar, Toolbar, Grid } from '@mui/material';
-import TodoList from './TodoList';
-import TodoForm from './TodoForm';
+import React from "react";
+import { Typography, Paper, AppBar, Toolbar, Grid } from "@mui/material";
+import TodoList from "./TodoList";
+import TodoForm from "./TodoForm";
+import { TodosProvider } from "./contexts/todos.context";
 
 function TodoApp() {
-	const initialTodos = [
-		{ id: 1, task: 'clean fish tank', completed: false },
-		{ id: 2, task: 'wash car', completed: true },
-		{ id: 3, task: 'Complete this course', completed: false }
-	];
-	const [ todos, setTodos ] = useState(initialTodos);
-	const addTodo = (newTodoText) => {
-		setTodos([ ...todos, { id: 4, task: newTodoText, completed: false } ]);
-	};
-	return (
-		<Paper
-			style={{
-				padding: 0,
-				margin: 0,
-				height: '100vh',
-				backgroundColor: '#fafafa'
-			}}
-			elevation={0}
-		>
-			<AppBar color="primary" position="static" style={{ height: '64px' }}>
-				<Toolbar>
-					<Typography color="inherit">TODOS WITH HOOKS</Typography>
-				</Toolbar>
-			</AppBar>
-			<TodoForm addTodo={addTodo} />
-			<TodoList todos={todos} />
-		</Paper>
-	);
+  return (
+    <Paper
+      style={{
+        padding: 0,
+        margin: 0,
+        height: "100vh",
+        backgroundColor: "#fafafa",
+      }}
+      elevation={0}
+    >
+      <AppBar color="primary" position="static" style={{ height: "64px" }}>
+        <Toolbar>
+          <Typography color="inherit">TODOS WITH HOOKS</Typography>
+        </Toolbar>
+      </AppBar>
+      <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
+        <Grid item xs={11} md={8} lg={4}>
+          <TodosProvider>
+            <TodoForm />
+            <TodoList />
+          </TodosProvider>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
 }
 
 export default TodoApp;
